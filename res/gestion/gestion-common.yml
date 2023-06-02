@@ -1,0 +1,166 @@
+name: Gestion
+
+components:
+  - name: api-adresse-data-gouv-fr
+    type: service
+  - name: cron-service
+    type: service
+  - name: geo-api-gouv-fr
+    type: service
+  - name: INTEROP
+    type: service
+  - name: genomi-uaa-service
+    type: service
+  - name: db-ts0chs20
+    type: database
+    label: oracle
+  - name: postgresql-tebdafpg11db
+    type: database
+    label: postgresql
+  - name: KEYCLOAK
+    type: service
+  - name: mongo-tebchsmongdb01
+    type: database
+    label: mongoDB
+  - name: MAIIA_COMPTA_WEBSERVICE_URL
+    type: service
+  - name: JFSE
+    type: service
+  - name: chs2020-back-end
+    type: service
+    dependencies:
+      - component: db-ts0chs20
+      - component: genomi-uaa-service
+      - component: JFSE
+      - component: INTEROP
+      - component: chs2020-partner-api-consumer
+      - component: appointments-service
+      - component: documents-service
+      - component: ehr-service
+      - component: synchro-service
+      - component: configs-service
+      - component: patients-service
+      - component: users-service
+      - component: KEYCLOAK
+      - component: MAIIA_COMPTA_WEBSERVICE_URL
+      - component: mongo-tebchsmongdb01
+  - name: notifications-service
+    type: service
+    dependencies:
+      - component: db-ts0chs20
+      - component: genomi-uaa-service
+  - name: chs2020-partner-api-consumer
+    type: service
+    dependencies:
+      - component: postgresql-tebdafpg11db
+      - component: genomi-uaa-service
+      - component: ehr-service
+      - component: backoffice-service
+      - component: users-service
+      - component: configs-service
+      - component: documents-service
+      - component: synchro-service
+      - component: patients-service
+      - component: notifications-service
+      - component: chs2020-back-end
+      - component: appointments-service
+      - component: merging-service
+  - name: daf-console-frontend
+    type: frontend
+  - name: daf-console-service
+    type: service
+    dependencies:
+      - component: KEYCLOAK
+      - component: postgresql-tebdafpg11db
+  - name: patients-service
+    type: service
+    dependencies:
+      - component: db-ts0chs20
+      - component: genomi-uaa-service
+      - component: backoffice-service
+      - component: ehr-service
+      - component: users-service
+      - component: synchro-service
+      - component: merging-service
+      - component: mongo-tebchsmongdb01
+  - name: backoffice-service
+    type: service
+    dependencies:
+        - component: db-ts0chs20
+        - component: genomi-uaa-service
+        - component: configs-service
+        - component: api-adresse-data-gouv-fr
+        - component: geo-api-gouv-fr
+        - component: users-service
+        - component: JFSE
+  - name: ehr-service
+    type: service
+    dependencies:
+        - component: db-ts0chs20
+        - component: genomi-uaa-service
+        - component: configs-service
+        - component: users-service
+        - component: backoffice-service
+        - component: patients-service
+        - component: chs2020-back-end
+        - component: mongo-tebchsmongdb01
+  - name: configs-service
+    type: service
+    dependencies:
+        - component: db-ts0chs20
+        - component: genomi-uaa-service
+        - component: users-service
+  - name: users-service
+    type: service
+    dependencies:
+      - component: db-ts0chs20
+      - component: genomi-uaa-service
+      - component: JFSE
+      - component: configs-service
+      - component: backoffice-service
+      - component: chs2020-back-end
+      - component: synchro-service
+      - component: patients-service
+      - component: KEYCLOAK
+  - name: documents-service
+    type: service
+    dependencies:
+      - component: db-ts0chs20
+      - component: genomi-uaa-service
+      - component: backoffice-service
+      - component: ehr-service
+      - component: users-service
+      - component: configs-service
+      - component: chs2020-back-end
+      - component: patients-service
+      - component: synchro-service
+  - name: appointments-service
+    type: service
+    dependencies:
+      - component: db-ts0chs20
+      - component: genomi-uaa-service
+  - name: merging-service
+    type: service
+    dependencies:
+      - component: db-ts0chs20
+      - component: genomi-uaa-service
+      - component: chs2020-back-end
+      - component: synchro-service
+      - component: mongo-tebchsmongdb01
+  - name: synchro-service
+    type: service
+    dependencies:
+      - component: db-ts0chs20
+      - component: genomi-uaa-service
+      - component: INTEROP
+      - component: configs-service
+      - component: users-service
+      - component: backoffice-service
+      - component: patients-service
+      - component: cron-service
+      - component: merging-service
+      - component: appointments-service
+      - component: chs2020-back-end
+      - component: documents-service
+      - component: mongo-tebchsmongdb01
+      - component: ehr-service

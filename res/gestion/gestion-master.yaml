@@ -1,0 +1,5 @@
+name: Gestion
+
+include:
+  - file: gestion-common.yml
+    relativeToMasterFile: true
